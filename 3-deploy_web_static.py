@@ -5,7 +5,7 @@ import time
 from fabric.api import local
 from fabric.operations import env, put, run
 
-env.hosts = ["54.174.245.21", "100.26.165.183"]
+env.hosts = ['54.174.245.21', '100.26.165.183']
 
 
 def do_pack():
@@ -13,7 +13,7 @@ def do_pack():
     try:
         local("mkdir -p versions")
         local("tar -cvzf versions/web_static_{}.tgz web_static/".
-                format(time.strftime("%Y%m%d%H%M%S")))
+              format(time.strftime("%Y%m%d%H%M%S")))
         return ("versions/web_static_{}.tgz".format(time.
                                                     strftime("%Y%m%d%H%M%S")))
     except:
@@ -22,7 +22,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """Distribute archive to web servers"""
-    if (os.path.isfile(archive_path) if False):
+    if (os.path.isfile(archive_path) is False):
         return False
 
     try:
