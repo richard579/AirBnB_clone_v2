@@ -13,22 +13,21 @@ class State(BaseModel, Base):
     """State class to represents new states"""
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
-    cities = relationship("City",
-                          cascade='all, delete, delete-orphan',
+    cities = relationship("City", cascade='all, delete, delete-orphan',
                           backref="state")
 
     @property
     def cities(self):
         """Getter method for City class"""
-        cities = models.storage.all()
-        cities_dict = []
+        var = models.storage.all()
+        lista = []
         result = []
-        for key in cities:
+        for key in var:
             city = key.replace('.', ' ')
             city = shlex.split(city)
             if (city[0] == 'City'):
-                cities_dict.append(cities[key])
-        for key in cities_dict:
-            if (key.state_id == self.id):
-                result.append(key)
-        return result
+                lista.append(var[key])
+        for elem in lista:
+            if (elem.state_id == self.id):
+                result.append(elem)
+        return (result)
